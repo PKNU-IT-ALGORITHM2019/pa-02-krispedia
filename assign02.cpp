@@ -11,9 +11,24 @@ int getDistance(pair<int,int> from, pair<int,int> to){
     return result;
 }
 
-int TPS(vector<pair<int,int> >, int N){
+int TPS(pair<int,int> check, vector<pair<int,int> > pos, int n){
+    if(n==0)
+        return 0;
+    vector<int> distance;
+    int minIndex;
+    int min=0;
+
+    for(int i=0; i<n; i++){
+        distance[i] = getDistance(check, pos[i]);
+        if(distance[i] < min){
+            min = distance[i];
+            minIndex = i;
+        }
+    }
+    pair<int,int> checkNext = pos[minIndex];
+    pos.erase(pos.begin()+minIndex);
     
-    return 0;
+    return TPS(checkNext, pos, n-1);
 }
 
 int main(void) {
@@ -39,7 +54,5 @@ int main(void) {
     for(auto &p: pos)
         cout<<p.first<<" "<<p.second<<endl;
 
-    int result = getDistance(pos[0], pos[3]);
-    cout<<result<<endl;
     return 0;
 }
