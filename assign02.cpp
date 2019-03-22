@@ -57,20 +57,15 @@ void switchTour(){
     for(int i=0; i<N; i++){
         int temp;
         temp = tour.top();
-//        cout<<"tour.top(): "<<temp<<'\n';
         minTour.push(temp);
-//        cout<<"minTour.push(): "<<temp<<'\n';
         tour_temp.push_back(temp);
-//        cout<<"tour_temp["<<i<<"]"<<tour_temp[i]<<'\n';
         tour.pop();
     }  
-//    cout<<"minTour.top(): "<<minTour.top()<<'\n';
     for(auto it=tour_temp.end()-1; it!=tour_temp.begin(); --it){
         tour.push(*it);
-//        cout<<"tour pushed: "<<*it;
     }
     tour.push(*tour_temp.begin());
-//    cout<<'\n';
+
 }
 void TSP(int checkIndex, int n, double dist){
     cout<<"TSP START!"<<'\n';
@@ -78,27 +73,18 @@ void TSP(int checkIndex, int n, double dist){
         double checkToStart = getDistance(node.find(checkIndex)->second, node.find(0)->second);
         dist += checkToStart;
         tour.push(checkIndex);
-//        cout<<"final stack pushed: "<<checkIndex<<'\n';
-//        cout<<'\n'<<"dist: "<<dist<<'\n';
-//        cout<<"minDist: "<<minDist<<'\n'<<'\n';
+
         if(dist<minDist){
-//            cout<<"minDist change!!"<<'\n';
             minDist = dist;
-//            cout<<"switch Tour!!"<<'\n';
             switchTour();
-//            cout<<"Switch Tour dond!!"<<'\n';
         }
         visited[checkIndex] = false;
-//        cout<<"stack poped: "<<tour.top()<<'\n';
         tour.pop();
-//        printVisited();    
-//        cout<<'\n';
+
     }
     else{
         visited[checkIndex] = true;
         tour.push(checkIndex);
-//        cout<<"stack pushed: "<<checkIndex<<'\n';
-//        printVisited();
 
         for(int i=0; i<N; i++){
             if(i == checkIndex)
@@ -110,8 +96,6 @@ void TSP(int checkIndex, int n, double dist){
         }
         visited[checkIndex] = false;
         tour.pop();
-//        cout<<"stack poped: "<<checkIndex<<'\n';
-//        printVisited();
     }
 }
 
